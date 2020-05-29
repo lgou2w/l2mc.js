@@ -1,0 +1,46 @@
+{
+  "name": "@lgou2w/mcnbt",
+  "version": "0.1.0",
+  "description": "A lgou2w Minecraft NBT library for Javascript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=10.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "npm run build:prod",
+    "build:dev": "npm run clean && tsc && cross-env NODE_ENV=development webpack",
+    "build:prod": "npm run clean && tsc && cross-env NODE_ENV=production webpack"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "license": "Apache-2.0",
+  "author": "lgou2w <lgou2w@hotmail.com>",
+  "homepage": "https://github.com/lgou2w/l2mc.js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgou2w/l2mc.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lgou2w/l2mc.js/issues"
+  },
+  "keywords": [
+    "lgou2w",
+    "minecraft",
+    "minecraft-nbt",
+    "named-binary-tag",
+    "nbt",
+    "nbt-writer",
+    "nbt-reader",
+    "nbt-base64",
+    "nbt-json"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
