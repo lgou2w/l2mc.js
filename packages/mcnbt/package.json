@@ -14,7 +14,8 @@
     "build:prod": "npm run clean && tsc && cross-env NODE_ENV=production webpack"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "files": [
     "dist",
