@@ -1,6 +1,6 @@
 {
   "name": "@lgou2w/mcping",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lgou2w Minecraft Server Ping library for Node",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
