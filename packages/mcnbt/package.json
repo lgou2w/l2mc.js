@@ -1,6 +1,6 @@
 {
   "name": "@lgou2w/mcnbt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A lgou2w Minecraft NBT library for Javascript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
