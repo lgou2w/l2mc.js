@@ -1,0 +1,45 @@
+{
+  "name": "@lgou2w/mcchat",
+  "version": "0.1.0",
+  "description": "A lgou2w Minecraft Chat library for Javascript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=10.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "npm run build:prod",
+    "build:dev": "npm run clean && tsc && cross-env NODE_ENV=development webpack",
+    "build:prod": "npm run clean && tsc && cross-env NODE_ENV=production webpack"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "license": "Apache-2.0",
+  "author": "lgou2w <lgou2w@hotmail.com>",
+  "homepage": "https://github.com/lgou2w/l2mc.js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgou2w/l2mc.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lgou2w/l2mc.js/issues"
+  },
+  "keywords": [
+    "minecraft",
+    "minecraft-chat",
+    "tellraw",
+    "chat-component",
+    "chat",
+    "chat-json",
+    "chat-html"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
