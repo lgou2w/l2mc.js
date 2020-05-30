@@ -21,5 +21,6 @@ export {
   toRaw,
   fromRaw,
   stripColor,
-  toColor
+  toColor,
+  renderToHtml
 } from './util'

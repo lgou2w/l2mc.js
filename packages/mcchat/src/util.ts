@@ -95,6 +95,51 @@ class RawMessage {
   }
 }
 
+function renderToHtml0 (results: string[], component: BaseComponent) {
+  const styles: string[] = []
+  const style = component.style
+  const color = style.color
+  if (ChatColor.RESET.equals(color)) {
+    styles.push('color:#000')
+    styles.push('text-shadow:none')
+    styles.push('text-decoration:none')
+    styles.push('font-weight:normal')
+    styles.push('font-style:normal')
+  } else if (color && color.rgb) {
+    styles.push(`color:#${color.rgb.toString(16)}`)
+  }
+  if (ChatColor.BOLD.equals(color) || style.isBold()) {
+    styles.push('font-weight:bold')
+  }
+  if (ChatColor.ITALIC.equals(color) || style.isItalic()) {
+    styles.push('font-style:italic')
+  }
+  if (ChatColor.UNDERLINE.equals(color) || style.isUnderlined()) {
+    styles.push('text-decoration:underline')
+  }
+  if (ChatColor.STRIKETHROUGH.equals(color) || style.isStrikethrough()) {
+    styles.push('text-decoration:line-through')
+  }
+  // TODO: ChatColor.OBFUSCATED
+
+  if (styles.length > 0) {
+    results.push(`<span style="${styles.join(';')}">`)
+  } else {
+    results.push('<span>')
+  }
+
+  if (component instanceof TextComponent) {
+    results.push(component
+      .text
+      .replace(/\n/g, '<br/>')
+      .replace(/\s/g, '&nbsp;'))
+  }
+  for (const sibling of component.siblings) {
+    renderToHtml0(results, sibling)
+  }
+  results.push('</span>')
+}
+
 // exports
 
 export function stripColor (input: string): string {
@@ -124,4 +169,14 @@ export function fromRaw (raw: string, altColorChar?: string): TextComponent {
   const rawWithColor = toColor(raw, altColorChar)
   const rawMessage = new RawMessage(rawWithColor)
   return rawMessage.get()
+}
+
+export function renderToHtml (
+  component: BaseComponent
+): string {
+  const result: string[] = []
+  result.push('<span class="l2mcchat">')
+  renderToHtml0(result, component)
+  result.push('</span>')
+  return result.join('')
 }
