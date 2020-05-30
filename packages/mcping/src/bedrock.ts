@@ -39,7 +39,7 @@ export function pingBedrock (
         const start = Date.now()
         const status = <BedrockStatus> {}
         const client = createSocket('udp4')
-        client.once('error', reject) // FIXME
+        client.once('error', reject)
         client.on('listening', () => {
           const ping = writePacketPing(start)
           client.send(ping, 0, ping.length, port || DEFAULT_PORT, ipv4)
