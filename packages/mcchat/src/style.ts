@@ -116,9 +116,9 @@ export class ChatStyle {
   }
 
   withParent (parent: ChatStyle): ChatStyle {
-    return this === ChatStyle.EMPTY
+    return this.equals(ChatStyle.EMPTY)
       ? parent
-      : parent === ChatStyle.EMPTY
+      : parent.equals(ChatStyle.EMPTY)
         ? this
         : new ChatStyle(
           this.color || parent.color,
@@ -132,6 +132,11 @@ export class ChatStyle {
           this.insertion || parent.insertion,
           this.font || parent.font
         )
+  }
+
+  copy (): ChatStyle {
+    return new ChatStyle(this.color, this.bold, this.italic, this.underlined, this.strikethrough, this.obfuscated,
+      this.clickEvent, this.hoverEvent, this.insertion, this.font)
   }
 
   equals (other: any): other is this {
