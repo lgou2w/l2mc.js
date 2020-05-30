@@ -1,0 +1,39 @@
+{
+  "name": "@lgou2w/mcvotifier2",
+  "version": "0.1.0",
+  "description": "A lgou2w Minecraft Votifier library for Node",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=10.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "npm run clean && tsc"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "Apache-2.0",
+  "author": "lgou2w <lgou2w@hotmail.com>",
+  "homepage": "https://github.com/lgou2w/l2mc.js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgou2w/l2mc.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lgou2w/l2mc.js/issues"
+  },
+  "keywords": [
+    "lgou2w",
+    "minecraft",
+    "minecraft-votifier",
+    "minecraft-nuvotifier"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
