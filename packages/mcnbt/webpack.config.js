@@ -35,7 +35,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'l2nbt',
+    library: 'l2mcnbt',
     umdNamedDefine: true
   },
   resolve: {
