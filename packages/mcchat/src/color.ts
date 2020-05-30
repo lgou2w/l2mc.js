@@ -116,11 +116,12 @@ export const ChatColor = {
   },
 
   fromCode (code: string): Formatting | undefined {
-    if (typeof code === 'string' && code.length === 1) {
+    if (typeof code === 'string' && code.length > 0) {
+      code = code.toLowerCase()
       for (const key in ChatColor) {
         // @ts-ignore
         const val = ChatColor[key]
-        if (ChatColor.isFormatting(val) && val.code === code) {
+        if (ChatColor.isFormatting(val) && (val.code === code || val.name === code)) {
           return val
         }
       }

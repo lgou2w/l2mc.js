@@ -17,3 +17,10 @@ export {
 
 export { Style, Component } from './type'
 export { toJson, toJsonObject, fromJson } from './json'
+export {
+  toRaw,
+  fromRaw,
+  stripColor,
+  toColor,
+  renderToHtml
+} from './util'
