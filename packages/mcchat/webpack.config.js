@@ -7,7 +7,7 @@ const path = require('path')
 const bannerPlugin = (options) => new webpack.BannerPlugin({
   ...options,
   banner: `
-l2mcnbt.js v${version} https://github.com/lgou2w/l2mc.js
+l2mcchat.js v${version} https://github.com/lgou2w/l2mc.js
 
 Copyright (C) 2019-${new Date().getFullYear()} The lgou2w <lgou2w@hotmail.com>
 
@@ -28,14 +28,14 @@ imitations under the License.
 module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: {
-    l2mcnbt: './src/index.ts',
-    'l2mcnbt.min': './src/index.ts'
+    l2mcchat: './src/index.ts',
+    'l2mcchat.min': './src/index.ts'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'l2mcnbt',
+    library: 'l2mcchat',
     umdNamedDefine: true
   },
   resolve: {

@@ -1,7 +1,7 @@
 {
-  "name": "@lgou2w/mcnbt",
-  "version": "0.1.3",
-  "description": "A lgou2w Minecraft NBT library for Javascript",
+  "name": "@lgou2w/mcchat",
+  "version": "0.1.0",
+  "description": "A lgou2w Minecraft Chat library for Javascript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "engines": {
@@ -32,15 +32,13 @@
     "url": "https://github.com/lgou2w/l2mc.js/issues"
   },
   "keywords": [
-    "lgou2w",
     "minecraft",
-    "minecraft-nbt",
-    "named-binary-tag",
-    "nbt",
-    "nbt-writer",
-    "nbt-reader",
-    "nbt-base64",
-    "nbt-json"
+    "minecraft-chat",
+    "tellraw",
+    "chat-component",
+    "chat",
+    "chat-json",
+    "chat-html"
   ],
   "dependencies": {},
   "devDependencies": {}

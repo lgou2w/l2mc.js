@@ -1,24 +1,21 @@
 {
-  "name": "@lgou2w/mcnbt",
-  "version": "0.1.3",
-  "description": "A lgou2w Minecraft NBT library for Javascript",
+  "name": "@lgou2w/mcping",
+  "version": "0.1.0",
+  "description": "A lgou2w Minecraft Server Ping library for Node",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "engines": {
     "node": ">=10.0"
   },
   "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "npm run build:prod",
-    "build:dev": "npm run clean && tsc && cross-env NODE_ENV=development webpack",
-    "build:prod": "npm run clean && tsc && cross-env NODE_ENV=production webpack"
+    "clean": "rimraf lib",
+    "build": "npm run clean && tsc"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "files": [
-    "dist",
     "lib"
   ],
   "license": "Apache-2.0",
@@ -34,13 +31,8 @@
   "keywords": [
     "lgou2w",
     "minecraft",
-    "minecraft-nbt",
-    "named-binary-tag",
-    "nbt",
-    "nbt-writer",
-    "nbt-reader",
-    "nbt-base64",
-    "nbt-json"
+    "minecraft-ping",
+    "minecraft-server-ping"
   ],
   "dependencies": {},
   "devDependencies": {}
