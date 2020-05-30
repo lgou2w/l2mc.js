@@ -5,8 +5,52 @@ import { ServerStatus } from './type'
 import { Socket, isIPv4 } from 'net'
 import { resolveSrv } from 'dns'
 
+// ChatComponent type define
+// See : https://github.com/lgou2w/l2mc.js/blob/develop/packages/mcchat/src/type.ts
+// Don't export!
+
+type ChatStyle = {
+  color?: string
+  bold?: boolean
+  italic?: boolean
+  underlined?: boolean
+  strikethrough?: boolean
+  obfuscated?: boolean
+  font?: string
+  insertion?: string
+  clickEvent?: {
+    action: 'open_url' | 'open_file' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard'
+    value: string
+  }
+  hoverEvent?: {
+    action: 'show_text' | 'show_item' | 'show_entity' | 'show_achievement'
+    value: string
+  }
+}
+
+type ChatComponent = ChatStyle & {
+  text: string
+  extra?: ChatComponent[]
+  translate?: string
+  with?: any[]
+  score?: {
+    name: string
+    objective: string
+    value?: string
+  }
+  selector?: string
+  keybind?: string
+  nbt?: string
+  interpret?: boolean
+  block?: string
+  entity?: string
+  storage?: string
+}
+
+//
+
 export interface MinecraftStatus extends ServerStatus {
-  description: string | { [key: string]: any }
+  description: string | ChatComponent
   players: {
     online: number
     max: number
