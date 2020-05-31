@@ -42,6 +42,10 @@
     "nbt-base64",
     "nbt-json"
   ],
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "long": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/long": "^4.0.1"
+  }
 }

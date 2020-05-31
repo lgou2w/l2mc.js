@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 
+import Long from 'long'
 import { encode } from './base64'
 import {
   NBT,
@@ -23,7 +24,7 @@ export class NBTWriter {
     this.buff = new ArrayBuffer(CAPACITY_DEFAULT)
     this.view = new Int8Array(this.buff)
     this.data = new DataView(this.buff)
-    this.littleEndian = littleEndian || false
+    this.littleEndian = !!littleEndian
   }
 
   private ensureCapacity (minCapacity: number) {
@@ -71,13 +72,31 @@ export class NBTWriter {
     return this
   }
 
-  writeLong (value: number | string | bigint): NBTWriter {
+  writeLong (value: number | string | Long): NBTWriter {
     this.ensureCapacity(this.pos + 8)
-    if (typeof value !== 'bigint') {
-      value = BigInt(value)
+    if (!Long.isLong(value)) {
+      value = Long.fromValue(value)
     }
-    this.data.setBigInt64(this.pos, value, this.littleEndian)
-    this.pos += 8
+    const { low, high } = value
+    if (this.littleEndian) {
+      this.writeByte(low & 0xFF)
+      this.writeByte((low >>> 8) & 0xFF)
+      this.writeByte((low >>> 16) & 0xFF)
+      this.writeByte((low >>> 24) & 0xFF)
+      this.writeByte(high & 0xFF)
+      this.writeByte((high >>> 8) & 0xFF)
+      this.writeByte((high >>> 16) & 0xFF)
+      this.writeByte((high >>> 24) & 0xFF)
+    } else {
+      this.writeByte((high >>> 24) & 0xFF)
+      this.writeByte((high >>> 16) & 0xFF)
+      this.writeByte((high >>> 8) & 0xFF)
+      this.writeByte(high & 0xFF)
+      this.writeByte((low >>> 24) & 0xFF)
+      this.writeByte((low >>> 16) & 0xFF)
+      this.writeByte((low >>> 8) & 0xFF)
+      this.writeByte(low & 0xFF)
+    }
     return this
   }
 
@@ -175,7 +194,7 @@ function writeValue (writer: NBTWriter, nbt: NBT): NBTWriter {
   }
 }
 
-function writeArray (writer: NBTWriter, value: (number | bigint)[], type: NBTType): NBTWriter {
+function writeArray (writer: NBTWriter, value: (number | Long)[], type: NBTType): NBTWriter {
   writer.writeInt(value.length)
   for (let i = 0; i < value.length; i++) {
     const val = value[i]

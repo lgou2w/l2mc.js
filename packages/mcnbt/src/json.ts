@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 
+import Long from 'long'
 import {
   NBT,
   NBTType,
@@ -295,11 +296,11 @@ class MojangsonParser {
         this.reader.cursor = start
         throw new Error('Expected value')
       }
-      return this.type(str)
+      return MojangsonParser.type(str)
     }
   }
 
-  private type (str: string): NBT {
+  private static type (str: string): NBT {
     if (MojangsonParser.FLOAT_PATTERN.test(str)) {
       return tagFloat(parseFloat(str.substring(0, str.length - 1)))
     }
@@ -307,7 +308,7 @@ class MojangsonParser {
       return tagByte(parseInt(str.substring(0, str.length - 1)))
     }
     if (MojangsonParser.LONG_PATTERN.test(str)) {
-      return tagLong(BigInt(str.substring(0, str.length - 1)))
+      return tagLong(Long.fromString(str.substring(0, str.length - 1)))
     }
     if (MojangsonParser.SHORT_PATTERN.test(str)) {
       return tagShort(parseInt(str.substring(0, str.length - 1)))

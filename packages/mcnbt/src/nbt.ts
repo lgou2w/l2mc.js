@@ -1,3 +1,5 @@
+import Long from 'long'
+
 /// NBT Types
 
 export type NBTType =
@@ -101,14 +103,14 @@ export function tagInt (value?: number) {
   return tagNumber(NBTTypes.TAG_INT, value)
 }
 
-export function tagLong (value?: number | string | bigint): NBT<bigint> {
+export function tagLong (value?: number | string | Long): NBT<Long> {
   if (typeof value === 'undefined') {
-    value = BigInt(0)
+    value = Long.fromNumber(0)
   }
   if (typeof value === 'number' || typeof value === 'string') {
-    value = BigInt(value)
-  } else if (typeof value !== 'bigint') {
-    throw new Error(`Invalid tag long value: ${value}. (Expected: number | string | bigint)`)
+    value = Long.fromValue(value)
+  } else if (!Long.isLong(value)) {
+    throw new Error(`Invalid tagLong value: ${value}. (Expected: number | string | Long)`)
   }
   return tag(NBTTypes.TAG_LONG, value)
 }
@@ -224,19 +226,19 @@ export function tagIntArray (value?: number[]): NBT<number[]> {
   return tag(NBTTypes.TAG_INT_ARRAY, value)
 }
 
-export function tagLongArray (value?: (number | string | bigint)[]): NBT<bigint[]> {
+export function tagLongArray (value?: (number | string | Long)[]): NBT<bigint[]> {
   if (typeof value === 'undefined') {
     value = []
   }
   if (!(value instanceof Array)) {
-    throw new Error(`Invalid tagLongArray value: ${value} (Expected: (number | string | bigint) of Array)`)
+    throw new Error(`Invalid tagLongArray value: ${value} (Expected: (number | string | Long) of Array)`)
   }
-  const result: bigint[] = []
+  const result: Long[] = []
   for (let el of value) {
     if (typeof el === 'number' || typeof el === 'string') {
-      el = BigInt(el)
-    } else if (typeof el !== 'bigint') {
-      throw new Error(`Invalid tagLongArray value: ${el}. (Expected: (number | string | bigint) of Array)`)
+      el = Long.fromValue(el)
+    } else if (!Long.isLong(el)) {
+      throw new Error(`Invalid tagLongArray value: ${el}. (Expected: (number | string | Long) of Array)`)
     }
     result.push(el)
   }

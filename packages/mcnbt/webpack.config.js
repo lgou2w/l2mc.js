@@ -38,6 +38,9 @@ module.exports = {
     library: 'l2mcnbt',
     umdNamedDefine: true
   },
+  externals: {
+    long: 'Long'
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },

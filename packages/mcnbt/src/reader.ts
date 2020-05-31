@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 
+import Long from 'long'
 import { decode } from './base64'
 import {
   NBT,
@@ -30,7 +31,7 @@ export class NBTReader {
   constructor (data: DataView, littleEndian?: boolean) {
     this.data = data
     this.length = data.byteLength
-    this.littleEndian = littleEndian || false
+    this.littleEndian = !!littleEndian
   }
 
   readByte (): number {
@@ -59,8 +60,32 @@ export class NBTReader {
     return v
   }
 
-  readLong (): bigint {
-    const v = this.data.getBigInt64(this.pos, this.littleEndian)
+  readLong (): Long {
+    let pos = this.pos
+    let low: number
+    let high: number
+    if (this.littleEndian) {
+      low = this.data.getUint8(pos + 2) << 16
+      low |= this.data.getUint8(pos + 1) << 8
+      low |= this.data.getUint8(pos)
+      low += this.data.getUint8(pos + 3) << 24 >>> 0
+      pos += 4
+      high = this.data.getUint8(pos + 2) << 16
+      high |= this.data.getUint8(pos + 1) << 8
+      high |= this.data.getUint8(pos)
+      high += this.data.getUint8(pos + 3) << 24 >>> 0
+    } else {
+      high = this.data.getUint8(pos + 1) << 16
+      high |= this.data.getUint8(pos + 2) << 8
+      high |= this.data.getUint8(pos + 3)
+      high += this.data.getUint8(pos) << 24 >>> 0
+      pos += 4
+      low = this.data.getUint8(pos + 1) << 16
+      low |= this.data.getUint8(pos + 2) << 8
+      low |= this.data.getUint8(pos + 3)
+      low += this.data.getUint8(pos) << 24 >>> 0
+    }
+    const v = new Long(low, high, false)
     this.pos += 8
     return v
   }
