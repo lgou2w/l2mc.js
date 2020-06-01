@@ -9,8 +9,8 @@ const CHAR_NO_COLOR = '&'
 const CHAR_CODES = '0123456789AaBbCcDdEeFfKkLlMmNnOoRr'
 const STRIP_COLOR = /§[0-9A-FK-OR]/i
 
-function toRaw0 (result: string[], component: BaseComponent, withoutColor: boolean) {
-  if (withoutColor) {
+function toRaw0 (result: string[], component: BaseComponent, withColor: boolean) {
+  if (withColor) {
     const style = component.style
     const color = style.color
     if (ChatColor.isFormatting(color)) {
@@ -37,7 +37,7 @@ function toRaw0 (result: string[], component: BaseComponent, withoutColor: boole
     result.push(component.text)
   }
   for (const sibling of component.siblings) {
-    toRaw0(result, sibling, withoutColor)
+    toRaw0(result, sibling, withColor)
   }
 }
 
@@ -159,9 +159,9 @@ export function toColor (input: string, altColorChar?: string): string {
   return chars.join('')
 }
 
-export function toRaw (component: BaseComponent, withoutColor?: boolean): string {
+export function toRaw (component: BaseComponent, withColor?: boolean): string {
   const result: string[] = []
-  toRaw0(result, component, !!withoutColor)
+  toRaw0(result, component, withColor === undefined ? true : withColor === true)
   return result.join('')
 }
 
