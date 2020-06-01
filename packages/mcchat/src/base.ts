@@ -58,8 +58,6 @@ export class TextComponent extends BaseComponent {
       other instanceof TextComponent &&
       this.text === other.text
   }
-
-  static EMPTY = new TextComponent('')
 }
 
 /// util
