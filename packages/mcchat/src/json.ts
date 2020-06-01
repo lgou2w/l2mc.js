@@ -55,6 +55,7 @@ function styleSerializer (style: ChatStyle): Style | undefined {
     }
   }
   if (style.hoverEvent) {
+    // Use the old value format, not the contents format
     value.hoverEvent = {
       // @ts-ignore
       action: style.hoverEvent.action,

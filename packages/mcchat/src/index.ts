@@ -24,3 +24,5 @@ export {
   toColor,
   renderToHtml
 } from './util'
+
+export { FancyMessage } from './fancy'
