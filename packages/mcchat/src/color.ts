@@ -174,3 +174,23 @@ export function rgbToHex (rgb: number): string {
     componentToHex(g) +
     componentToHex(b)
 }
+
+//
+// RGB hex color is a feature of minecraft 1.16, this function can convert
+// the color rgb that supports the old version to a unified color type name
+//
+// e.g.: #f55 | #ff5555 -> red
+//
+
+const RGB_FORMATTING_TABLE = Object
+  .values(ChatColor)
+  .filter((value) => typeof value === 'object' && value.rgb !== undefined)
+  .reduce<{[key: number]: string}>((pv, value) => {
+    // @ts-ignore
+    pv[value.rgb] = value.name
+    return pv
+  }, {})
+
+export function friendlyColorRGB (rgb: number): string {
+  return RGB_FORMATTING_TABLE[rgb] || rgbToHex(rgb)
+}

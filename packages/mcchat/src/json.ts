@@ -3,7 +3,7 @@
 import { ChatStyle } from './style'
 import { ChatClickEvent } from './click'
 import { ChatHoverEvent } from './hover'
-import { ChatColor, rgbToHex } from './color'
+import { ChatColor, friendlyColorRGB } from './color'
 import { Style, Component } from './type'
 import { BaseComponent, TextComponent } from './base'
 import { TranslationComponent } from './translation'
@@ -27,7 +27,7 @@ function styleSerializer (style: ChatStyle): Style | undefined {
   if (style.color) {
     value.color = ChatColor.isFormatting(style.color)
       ? style.color.name
-      : rgbToHex(style.color.rgb)
+      : friendlyColorRGB(style.color.rgb)
   }
   if (style.bold !== undefined) {
     value.bold = style.bold
