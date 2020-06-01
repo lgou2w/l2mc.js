@@ -139,7 +139,7 @@ export const ChatColor = {
       throw new Error(`Invalid rgb hex: ${rgb}`)
     }
 
-    const value = typeof rgb === 'number' ? rgb : parseInt(hexCompletion(rgb), 16)
+    const value = typeof rgb === 'number' ? rgb : hexToRGB(rgb)
     return <Color> {
       rgb: value,
       equals (other: any): boolean {
@@ -154,4 +154,23 @@ function hexCompletion (hex: string): string {
   if (hex.length === 3) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
   } return hex
+}
+
+export function hexToRGB (hex: string): number {
+  return parseInt(hexCompletion(hex), 16)
+}
+
+function componentToHex (c: number): string {
+  const hex = c.toString(16)
+  return hex.length === 1 ? '0' + hex : hex
+}
+
+export function rgbToHex (rgb: number): string {
+  const r = (rgb >> 16) & 0xFF
+  const g = (rgb >> 8) & 0xFF
+  const b = rgb & 0xFF
+  return '#' +
+    componentToHex(r) +
+    componentToHex(g) +
+    componentToHex(b)
 }

@@ -105,7 +105,7 @@ export class ChatStyle {
         obfuscated = true
         break
       case ChatColor.RESET:
-        return ChatStyle.EMPTY
+        return new ChatStyle()
       default:
         bold = italic = underlined = strikethrough = obfuscated = false
         color = formatting

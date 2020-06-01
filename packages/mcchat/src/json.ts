@@ -3,7 +3,7 @@
 import { ChatStyle } from './style'
 import { ChatClickEvent } from './click'
 import { ChatHoverEvent } from './hover'
-import { Color, Formatting, ChatColor } from './color'
+import { ChatColor, rgbToHex } from './color'
 import { Style, Component } from './type'
 import { BaseComponent, TextComponent } from './base'
 import { TranslationComponent } from './translation'
@@ -27,7 +27,7 @@ function styleSerializer (style: ChatStyle): Style | undefined {
   if (style.color) {
     value.color = ChatColor.isFormatting(style.color)
       ? style.color.name
-      : '#' + style.color.rgb.toString(16)
+      : rgbToHex(style.color.rgb)
   }
   if (style.bold !== undefined) {
     value.bold = style.bold
@@ -226,7 +226,7 @@ function componentDeserializer (component: string | string[] | Component | Compo
         }
       }
     }
-    value.style = styleDeserializer(component) || ChatStyle.EMPTY
+    value.style = styleDeserializer(component) || new ChatStyle()
     return value
   } else if (Array.isArray(component)) {
     let value: any

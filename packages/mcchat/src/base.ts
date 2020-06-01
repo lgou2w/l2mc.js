@@ -6,7 +6,7 @@ import { ChatStyle } from './style'
 /// Base component
 
 export abstract class BaseComponent {
-  style = ChatStyle.EMPTY
+  style = new ChatStyle()
   siblings: BaseComponent[] = []
 
   setStyle (style: ChatStyle): this {

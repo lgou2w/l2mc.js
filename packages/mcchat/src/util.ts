@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { BaseComponent, TextComponent } from './base'
-import { ChatColor } from './color'
+import { ChatColor, rgbToHex } from './color'
 import { ChatStyle } from './style'
 
 const CHAR_COLOR = '§'
@@ -45,7 +45,7 @@ class RawMessage {
   private readonly raw: string
   private readonly regex = /(§[0-9A-FK-OR])/ig
   private current?: TextComponent
-  private style = ChatStyle.EMPTY
+  private style = new ChatStyle()
   private index = 0
   constructor (raw: string) {
     this.raw = raw
@@ -72,7 +72,7 @@ class RawMessage {
       const match = array[0]
       const color = ChatColor.parseSafely(match[1])
       if (ChatColor.RESET.equals(color)) {
-        this.style = ChatStyle.EMPTY
+        this.style = new ChatStyle()
       } else if (ChatColor.BOLD.equals(color)) {
         this.style = this.style.withBold(true)
       } else if (ChatColor.ITALIC.equals(color)) {
@@ -106,7 +106,7 @@ function renderToHtml0 (results: string[], component: BaseComponent) {
     styles.push('font-weight:normal')
     styles.push('font-style:normal')
   } else if (color && color.rgb) {
-    styles.push(`color:#${color.rgb.toString(16)}`)
+    styles.push(`color:${rgbToHex(color.rgb)}`)
   }
   if (ChatColor.BOLD.equals(color) || style.isBold()) {
     styles.push('font-weight:bold')
