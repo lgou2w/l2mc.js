@@ -2,7 +2,7 @@
 
 <p>
 <a href="https://www.npmjs.com/package/@lgou2w/mcnbt"><img src="https://img.shields.io/npm/v/@lgou2w/mcnbt?logo=npm&style=flat-square" /></a>
-<a href="https://github.com/lgou2w/l2mc.js/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/l2nbt?logo=apache&style=flat-square" /></a>
+<a href="https://github.com/lgou2w/l2mc.js/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@lgou2w/mcnbt?logo=apache&style=flat-square" /></a>
 </p>
 
 A lgou2w Minecraft NBT library for Javascript
