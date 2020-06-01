@@ -182,14 +182,15 @@ export function rgbToHex (rgb: number): string {
 // e.g.: #f55 | #ff5555 -> red
 //
 
-const RGB_FORMATTING_TABLE = Object
-  .values(ChatColor)
-  .filter((value) => typeof value === 'object' && value.rgb !== undefined)
-  .reduce<{[key: number]: string}>((pv, value) => {
-    // @ts-ignore
-    pv[value.rgb] = value.name
-    return pv
-  }, {})
+const RGB_FORMATTING_TABLE: { [key: number]: string } = {}
+
+for (const key in ChatColor) {
+  // @ts-ignore
+  const val = ChatColor[key]
+  if (typeof val === 'object' && val.rgb !== undefined) {
+    RGB_FORMATTING_TABLE[val.rgb] = val.name
+  }
+}
 
 export function friendlyColorRGB (rgb: number): string {
   return RGB_FORMATTING_TABLE[rgb] || rgbToHex(rgb)
