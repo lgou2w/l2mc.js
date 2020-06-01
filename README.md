@@ -2,7 +2,7 @@
 
 <p>
 <a href="https://github.com/lgou2w/l2mc.js/releases"><img src="https://img.shields.io/github/v/tag/lgou2w/l2mc.js?label=version&logo=codesandbox" /></a>
-<a href="https://github.com/lgou2w/l2mc.js/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/l2nbt?logo=apache&style=flat-square" /></a>
+<a href="https://github.com/lgou2w/l2mc.js/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-%2397ca00?logo=apache&style=flat-square" /></a>
 <a href="https://lerna.js.org/"><img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff" /></a>
 </p>
 
