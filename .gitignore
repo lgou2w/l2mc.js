@@ -192,3 +192,5 @@ fabric.properties
 # User custom
 dist/
 lib/
+coverage/
+.nyc_output/
