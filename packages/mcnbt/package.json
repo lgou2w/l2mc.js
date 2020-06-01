@@ -8,10 +8,12 @@
     "node": ">=10.0"
   },
   "scripts": {
-    "clean": "rimraf lib dist",
+    "clean": "rimraf lib dist coverage",
     "build": "npm run build:prod",
     "build:dev": "npm run clean && tsc && cross-env NODE_ENV=development webpack",
-    "build:prod": "npm run clean && tsc && cross-env NODE_ENV=production webpack"
+    "build:prod": "npm run clean && tsc && cross-env NODE_ENV=production webpack",
+    "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts --exit",
+    "test:coverage": "rimraf coverage && nyc --reporter=lcov --reporter=text npm run test"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
