@@ -70,6 +70,7 @@ export async function ping (
   port?: number | undefined,
   options?: Options
 ): Promise<MinecraftStatus> {
+  const rawHost = host
   const _options = { ...DEFAULT_OPTIONS, ...options }
   if (!isIPv4(host)) {
     await new Promise((resolve) => {
@@ -102,7 +103,7 @@ export async function ping (
         socket.end()
         const response = readPacketResponse(data)
         const status = <MinecraftStatus> { ...response }
-        status.host = host
+        status.host = rawHost
         status.port = socket.remotePort || port || DEFAULT_PORT
         status.ipv4 = socket.remoteAddress || host
         status.latency = Date.now() - start
