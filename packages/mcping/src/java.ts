@@ -3,7 +3,7 @@
 import { Transform, TransformCallback } from 'stream'
 import { ServerStatus } from './type'
 import { Socket, isIPv4 } from 'net'
-import { resolveSrv } from 'dns'
+import { resolveSrv, SrvRecord } from 'dns'
 
 // ChatComponent type define
 // See : https://github.com/lgou2w/l2mc.js/blob/develop/packages/mcchat/src/type.ts
@@ -57,6 +57,12 @@ export interface MinecraftStatus extends ServerStatus {
     sample?: { id: string, name: string }[]
   }
   favicon?: string
+  srv?: {
+    priority: number
+    weight: number
+    port: number
+    name: string
+  }
   [key: string]: any
 }
 
@@ -72,15 +78,16 @@ export async function ping (
 ): Promise<MinecraftStatus> {
   const rawHost = host
   const _options = { ...DEFAULT_OPTIONS, ...options }
+  let srv: SrvRecord
   if (!isIPv4(host)) {
-    await new Promise((resolve) => {
+    srv = await new Promise((resolve) => {
       resolveSrv(`_minecraft._tcp.${host}`, (err, addresses) => {
         if (err || addresses.length <= 0) {
-          resolve()
+          resolve(undefined)
         } else {
           host = addresses[0].name
           port = addresses[0].port
-          resolve()
+          resolve(addresses[0])
         }
       })
     })
@@ -107,6 +114,7 @@ export async function ping (
         status.port = socket.remotePort || port || DEFAULT_PORT
         status.ipv4 = socket.remoteAddress || host
         status.latency = Date.now() - start
+        status.srv = srv
         resolve(status)
       })
       socket.connect(port || DEFAULT_PORT, host, () => {
