@@ -69,16 +69,20 @@ function ping (
         reject(new Error('Socket timeout'))
       })
       socket.on('data', (data) => {
-        socket.end()
-        const pong = readPacketPong(data)
-        status.host = host
-        status.port = socket.remotePort || port || DEFAULT_PORT
-        status.ipv4 = socket.remoteAddress || host
-        status.latency = Date.now() - start
-        status.version = pong.version
-        status.players = pong.players
-        status.description = pong.description
-        resolve(status)
+        socket.destroy()
+        try {
+          const pong = readPacketPong(data)
+          status.host = host
+          status.port = socket.remotePort || port || DEFAULT_PORT
+          status.ipv4 = socket.remoteAddress || host
+          status.latency = Date.now() - start
+          status.version = pong.version
+          status.players = pong.players
+          status.description = pong.description
+          resolve(status)
+        } catch (e) {
+          reject(e)
+        }
       })
       socket.connect(port || DEFAULT_PORT, host, () => {
         socket.setTimeout(_options.timeout!)

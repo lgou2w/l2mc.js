@@ -47,24 +47,28 @@ export function pingBedrock (
         client.on('message', (msg, rinfo) => {
           client.close()
           clearTimeout(timeoutHandle)
-          const pong = readPacketPong(msg)
-          status.host = host
-          status.port = rinfo.port
-          status.ipv4 = ipv4
-          status.latency = Date.now() - start
-          status.description = pong.serverName
-          status.version = {
-            name: pong.serverVersion,
-            protocol: parseInt(pong.protocolVersion)
+          try {
+            const pong = readPacketPong(msg)
+            status.host = host
+            status.port = rinfo.port
+            status.ipv4 = ipv4
+            status.latency = Date.now() - start
+            status.description = pong.serverName
+            status.version = {
+              name: pong.serverVersion,
+              protocol: parseInt(pong.protocolVersion)
+            }
+            status.players = {
+              online: parseInt(pong.online),
+              max: parseInt(pong.max)
+            }
+            status.serverId = pong.serverId
+            status.gameId = pong.gameId
+            status.payload = pong.payload
+            resolve(status)
+          } catch (e) {
+            reject(e)
           }
-          status.players = {
-            online: parseInt(pong.online),
-            max: parseInt(pong.max)
-          }
-          status.serverId = pong.serverId
-          status.gameId = pong.gameId
-          status.payload = pong.payload
-          resolve(status)
         })
         client.bind()
         const timeoutHandle = setTimeout(() => {

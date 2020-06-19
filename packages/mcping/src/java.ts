@@ -107,15 +107,19 @@ export async function ping (
       reader.on('data', (data: Buffer) => {
         // do not send ping packet, because some plugins will directly
         // disconnect after replying to the response
-        socket.end()
-        const response = readPacketResponse(data)
-        const status = <MinecraftStatus> { ...response }
-        status.host = rawHost
-        status.port = socket.remotePort || port || DEFAULT_PORT
-        status.ipv4 = socket.remoteAddress || host
-        status.latency = Date.now() - start
-        status.srv = srv
-        resolve(status)
+        socket.destroy()
+        try {
+          const response = readPacketResponse(data)
+          const status = <MinecraftStatus> { ...response }
+          status.host = rawHost
+          status.port = socket.remotePort || port || DEFAULT_PORT
+          status.ipv4 = socket.remoteAddress || host
+          status.latency = Date.now() - start
+          status.srv = srv
+          resolve(status)
+        } catch (e) {
+          reject(e)
+        }
       })
       socket.connect(port || DEFAULT_PORT, host, () => {
         socket.setTimeout(_options.timeout!)
