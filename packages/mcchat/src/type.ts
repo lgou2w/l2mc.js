@@ -20,10 +20,10 @@ export type Style = {
 }
 
 export type Component = Style & {
-  text: string
-  extra?: Component[]
+  text?: string
+  extra?: string[] | Component[]
   translate?: string
-  with?: any[]
+  with?: string[] | Component[]
   score?: {
     name: string
     objective: string
