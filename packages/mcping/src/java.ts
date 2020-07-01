@@ -29,10 +29,10 @@ type ChatStyle = {
 }
 
 type ChatComponent = ChatStyle & {
-  text: string
-  extra?: ChatComponent[]
+  text?: string
+  extra?: string[] | ChatComponent[]
   translate?: string
-  with?: any[]
+  with?: string[] | ChatComponent[]
   score?: {
     name: string
     objective: string
