@@ -32,7 +32,7 @@
     "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "terser-webpack-plugin": "^3.0.6",
-    "ts-loader": "^7.0.5",
+    "ts-loader": "^8.0.1",
     "ts-mocha": "^7.0.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.6",
