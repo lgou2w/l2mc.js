@@ -78,7 +78,7 @@ export async function ping (
 ): Promise<MinecraftStatus> {
   const rawHost = host
   const _options = { ...DEFAULT_OPTIONS, ...options }
-  let srv: SrvRecord
+  let srv: SrvRecord | undefined
   if (!isIPv4(host)) {
     srv = await new Promise((resolve) => {
       resolveSrv(`_minecraft._tcp.${host}`, (err, addresses) => {

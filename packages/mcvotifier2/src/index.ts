@@ -17,6 +17,12 @@ type Options = {
   }
 }
 
+type Response = {
+  status: 'ok' | 'error'
+  cause?: string
+  errorMessage?: string
+}
+
 export function vote (options: Options): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     try {
@@ -48,12 +54,6 @@ export function vote (options: Options): Promise<void> {
       reject(e)
     }
   })
-}
-
-type Response = {
-  status: 'ok' | 'error'
-  cause?: string
-  errorMessage?: string
 }
 
 function validateOptions (options?: Options) {

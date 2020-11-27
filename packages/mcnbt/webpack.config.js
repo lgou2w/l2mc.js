@@ -52,9 +52,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true,
-        sourceMap: true,
         include: /\.min\.js$/,
         extractComments: {
           condition: false
